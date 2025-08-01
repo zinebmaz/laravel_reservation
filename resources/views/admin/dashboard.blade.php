@@ -62,6 +62,30 @@
             padding: 10px 15px;
         }
     }
+
+.btn-logout {
+  background-color: #56CCF2;       /* Bleu ciel doux */
+  border: none;
+  color: white;
+  font-weight: 600;
+  padding: 10px 18px;
+  border-radius: 8px;
+  width: 100%;
+  font-size: 16px;
+  box-shadow: 0 4px 8px rgba(86,204,242,0.4);
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.btn-logout:hover {
+  background-color: #2D9CDB;       /* Bleu un peu plus foncé au survol */
+  box-shadow: 0 6px 12px rgba(45,156,219,0.5);
+  cursor: pointer;
+  color: white;
+  text-decoration: none;
+}
+
+
+
 </style>
 
 <div class="sidebar">
@@ -75,7 +99,7 @@
 
     <form action="{{ route('logout') }}" method="POST" class="mt-3 px-3">
         @csrf
-        <button type="submit" class="btn btn-danger w-100">🚪 Déconnexion</button>
+        <button type="submit" class="btn-logout">🚪 Déconnexion</button>
     </form>
 </div>
 
