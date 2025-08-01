@@ -2,37 +2,51 @@
 
 @section('content')
 <style>
-    /* Style de la sidebar */
+    /* Dégradé bleu ciel */
     .sidebar {
         height: 100vh;
         position: fixed;
         top: 0;
         left: 0;
-        width: 220px;
-        background-color: #343a40; /* Gris foncé Bootstrap */
-        padding-top: 60px; /* pour espace depuis le haut si tu as un header */
+        width: 240px;
+        background: linear-gradient(180deg, #00bfff, #1e90ff);
+        padding-top: 60px;
+        box-shadow: 2px 0 8px rgba(0,0,0,0.2);
     }
 
+    /* Titre du dashboard */
+    .sidebar h3 {
+        color: white;
+        font-weight: bold;
+        text-align: center;
+        margin-bottom: 30px;
+    }
+
+    /* Liens */
     .sidebar a {
         display: block;
-        color: #ddd;
+        color: #f0f8ff;
         padding: 12px 20px;
         text-decoration: none;
         font-weight: 500;
+        border-radius: 5px;
+        margin: 5px 10px;
+        transition: all 0.3s ease;
     }
 
+    /* Effet au survol */
     .sidebar a:hover, .sidebar a.active {
-        background-color: #495057;
-        color: #fff;
-        text-decoration: none;
+        background-color: rgba(255, 255, 255, 0.2);
+        color: white;
     }
 
+    /* Section contenu */
     .content {
-        margin-left: 220px; /* pour laisser la place à la sidebar */
+        margin-left: 240px;
         padding: 20px;
     }
 
-    /* Responsive - sur petits écrans la sidebar devient horizontale */
+    /* Responsive */
     @media (max-width: 768px) {
         .sidebar {
             position: relative;
@@ -51,23 +65,23 @@
 </style>
 
 <div class="sidebar">
-    <h3 class="text-white px-3">Admin Dashboard</h3>
-    <a href="#" class="disabled" style="cursor:default;">Bienvenue <br><strong>{{ Auth::user()->name }}</strong></a>
-    <a href="{{ route('admin.offers.index') }}">Gérer les Offres</a>
-    <a href="{{ route('admin.offers.create') }}">Créer une Offre</a>
+    <h3>⚙ Admin Dashboard</h3>
+    <a href="#" style="cursor:default; background-color: rgba(255,255,255,0.15);">
+        Bienvenue<br><strong>{{ Auth::user()->name }}</strong>
+    </a>
+    <a href="{{ route('admin.offers.index') }}">📦 Gérer les Offres</a>
+    <a href="{{ route('admin.offers.create') }}">➕ Créer une Offre</a>
     <a href="{{ route('admin.reservations.index') }}">📋 Gérer les Réservations</a>
 
     <form action="{{ route('logout') }}" method="POST" class="mt-3 px-3">
         @csrf
-        <button type="submit" class="btn btn-danger w-100">Déconnexion</button>
+        <button type="submit" class="btn btn-danger w-100">🚪 Déconnexion</button>
     </form>
 </div>
 
 <div class="content">
-    <h1>Bienvenue Admin</h1>
+    <h1 class="text-primary">Bienvenue Admin 🎉</h1>
     <p>Vous êtes connecté en tant que <strong>{{ Auth::user()->name }}</strong></p>
-
-    {{-- Tu peux aussi ajouter ici le contenu principal du dashboard --}}
 </div>
 @endsection
 
