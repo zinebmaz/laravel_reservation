@@ -5,9 +5,9 @@
     <h1>📅 Liste des Réservations</h1>
     <table class="table table-striped mt-3">
         <thead>
-            
+
             <tr>
-                <th>#</th>
+                
                 <th>Nom</th>
                 <th>Téléphone</th>
                 <th>Invités</th>
@@ -20,7 +20,7 @@
         <tbody>
             @foreach($reservations as $reservation)
                 <tr>
-                    <td>{{ $reservation->id }}</td>
+                    
                     <td>{{ $reservation->name }}</td>
                     <td>{{ $reservation->phone }}</td>
                     <td>{{ $reservation->guests }}</td>
