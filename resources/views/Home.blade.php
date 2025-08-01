@@ -54,14 +54,14 @@ https://templatemo.com/tm-580-woox-travel
                     </a>
                     <!-- ***** Logo End ***** -->
                     <!-- ***** Menu Start ***** -->
-                    <!-- <ul class="nav">
+                    <ul class="nav">
                         <li><a href="{{route('index')}}">Home</a></li>
                         <li><a href="{{route('Home')}}" class="active">accueil</a></li>
                         <li><a href="{{route('deals')}}">Deals</a></li>
                         <li><a href="{{route('reservation')}}">Reservation</a></li>
                         <li><a href="{{route('reservation')}}">Book Yours</a></li>
                         <li><a href="{{ route('login') }}"><i class="fa fa-user"></i> Login</a></li>
-                    </ul>    -->
+                    </ul>   
                     <a class='menu-trigger'>
                         <span>Menu</span>
                     </a>
