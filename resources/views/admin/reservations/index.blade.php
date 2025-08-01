@@ -4,7 +4,8 @@
 <div class="container mt-4">
     <h1>📅 Liste des Réservations</h1>
     <table class="table table-striped mt-3">
-        <!-- <thead>
+        <thead>
+            
             <tr>
                 <th>#</th>
                 <th>Nom</th>
@@ -15,7 +16,7 @@
                 <th>Admin associé</th>
                 <th>Créée le</th>
             </tr>
-        </thead> -->
+        </thead> 
         <tbody>
             @foreach($reservations as $reservation)
                 <tr>
