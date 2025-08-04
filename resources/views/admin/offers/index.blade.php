@@ -94,11 +94,50 @@
     <a href="{{ route('admin.offers.create') }}" class="btn btn-custom btn-add mb-3">➕ Add Offer</a>
 
     <br /><br  />
+<form method="GET" action="{{ route('admin.offers.index') }}" class="mb-4">
+  <div class="row g-3 align-items-end">
+    <div class="col-lg-4">
+      <label for="location" class="form-label">Destinations</label>
+      <select name="location" id="location" class="form-select" onchange="this.form.submit()">
+        <option value="" {{ request('location') == '' ? 'selected' : '' }}>Toutes</option>
+        <option value="Italy" {{ request('location') == 'Italy' ? 'selected' : '' }}>Italy</option>
+        <option value="France" {{ request('location') == 'France' ? 'selected' : '' }}>France</option>
+        <option value="Switzerland" {{ request('location') == 'Switzerland' ? 'selected' : '' }}>Switzerland</option>
+        <!-- Ajoute d'autres destinations ici -->
+      </select>
+    </div>
+
+    <div class="col-lg-4">
+      <label for="price" class="form-label">Prix</label>
+      <select name="price" id="price" class="form-select" onchange="this.form.submit()">
+        <option value="" {{ request('price') == '' ? 'selected' : '' }}>Toutes</option>
+        <option value="100" {{ request('price') == '100' ? 'selected' : '' }}>$100 - $250</option>
+        <option value="250" {{ request('price') == '250' ? 'selected' : '' }}>$250 - $500</option>
+        <option value="500" {{ request('price') == '500' ? 'selected' : '' }}>$500 - $1,000</option>
+        <option value="1000" {{ request('price') == '1000' ? 'selected' : '' }}>$1,000 - $2,500</option>
+        <option value="2500+" {{ request('price') == '2500+' ? 'selected' : '' }}>$2,500+</option>
+      </select>
+    </div>
+
+    <div class="col-lg-4">
+      <button type="submit" class="btn btn-primary w-100">Rechercher</button>
+    </div>
+  </div>
+</form>
+
+
+
+
+
+
+
+
     <div class="table-responsive">
         <table class="table offers-table">
             <thead>
                 <tr>
                     <th>Title</th>
+                    <th>Location</th>
                     <th>Price</th>
                     <th>Image</th>
                     <th>Actions</th>
@@ -108,6 +147,7 @@
                 @foreach($offers as $offer)
                 <tr>
                     <td>{{ $offer->title }}</td>
+                    <td>{{ $offer->location }}</td>
                     <td>{{ $offer->price }} $</td>
                     <td>
                         @if($offer->image)

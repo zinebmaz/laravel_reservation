@@ -8,10 +8,35 @@ use Illuminate\Http\Request;
 
 class OfferController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $offers = Offer::latest()->paginate(10);
-        return view('admin.offers.index', compact('offers'));
+         $query = Offer::query();
+
+    // Filtrer par location si présent
+    if ($request->filled('location')) {
+        $query->where('location', $request->location);
+    }
+
+    // Filtrer par price range si présent
+    if ($request->filled('price')) {
+        $price = $request->price;
+
+        if ($price === '100') {
+            $query->whereBetween('price', [100, 250]);
+        } elseif ($price === '250') {
+            $query->whereBetween('price', [250, 500]);
+        } elseif ($price === '500') {
+            $query->whereBetween('price', [500, 1000]);
+        } elseif ($price === '1000') {
+            $query->whereBetween('price', [1000, 2500]);
+        } elseif ($price === '2500+') {
+            $query->where('price', '>=', 2500);
+        }
+    }
+
+    $offers = $query->latest()->paginate(10)->withQueryString();
+
+    return view('admin.offers.index', compact('offers'));
     }
 
     public function create()

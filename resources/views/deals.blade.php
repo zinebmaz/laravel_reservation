@@ -60,7 +60,7 @@ https://templatemo.com/tm-580-woox-travel
                         <li><a href="{{route('deals')}}" class="active">Deals</a></li>
                         <li><a href="{{route('reservation')}}">Reservation</a></li>
                         <li><a href="{{route('reservation')}}">Book Yours</a></li>
-                         <li><a href="{{ route('login') }}"><i class="fa fa-user"></i> Login</a></li>
+                        <li><a href="{{ route('login') }}" class="login-btn"><i class="fa fa-user"></i> Login</a></li>
                     </ul>   
                     <a class='menu-trigger'>
                         <span>Menu</span>
@@ -74,24 +74,51 @@ https://templatemo.com/tm-580-woox-travel
   <!-- ***** Header Area End ***** -->
 <style>
 
+/* Conteneur du menu */
+.main-nav {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    width: 100% !important;
+    white-space: nowrap !important; /* Empêche le retour à la ligne */
+}
+
+/* Liste des liens */
 .main-nav .nav {
-    display: flex;
-    align-items: center;
-    gap: 20px; /* espace entre les liens */
-    list-style: none;
-    margin: 0;
-    padding: 0;
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    gap: 20px !important;
+    list-style: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    flex-wrap: nowrap !important; /* Empêche le passage à la ligne */
 }
 
+/* Items */
 .main-nav .nav li {
-    display: inline-block;
+    display: flex !important;
+    align-items: center !important;
+    height: 100% !important;
 }
 
+/* Liens */
 .main-nav .nav li a {
-    text-decoration: none;
-    color: #fff; /* couleur du texte, à ajuster */
-    padding: 8px 12px;
+    text-decoration: none !important;
+    color: #fff !important;
+    padding: 8px 14px !important;
+    display: flex !important;
+    align-items: center !important;
+    height: 100% !important;
 }
+
+
+.main-nav .nav li:last-child {
+    margin-left: auto !important;
+}
+
+
+
 
 
 </style>
@@ -111,46 +138,39 @@ https://templatemo.com/tm-580-woox-travel
     <div class="container">
       <div class="row">
         <div class="col-lg-12">
-          <form id="search-form" name="gs" method="submit" role="search" action="#">
-            <div class="row">
-              <div class="col-lg-2">
-                <h4>Sort Deals By:</h4>
-              </div>
-              <div class="col-lg-4">
-                  <fieldset>
-                      <select name="Location" class="form-select" aria-label="Default select example" id="chooseLocation" onChange="this.form.click()">
-                          <option selected>Destinations</option>
-                          <option type="checkbox" name="option1" value="Italy">Italy</option>
-                          <option value="France">France</option>
-                          <option value="Switzerland">Switzerland</option>
-                          <option value="Thailand">Thailand</option>
-                          <option value="Australia">Australia</option>
-                          <option value="India">India</option>
-                          <option value="Indonesia">Indonesia</option>
-                          <option value="Malaysia">Malaysia</option>
-                          <option value="Singapore">Singapore</option>
-                      </select>
-                  </fieldset>
-              </div>
-              <div class="col-lg-4">
-                  <fieldset>
-                      <select name="Price" class="form-select" aria-label="Default select example" id="choosePrice" onChange="this.form.click()">
-                          <option selected>Price Range</option>
-                          <option value="100">$100 - $250</option>
-                          <option value="250">$250 - $500</option>
-                          <option value="500">$500 - $1,000</option>
-                          <option value="1000">$1,000 - $2,500</option>
-                          <option value="2500+">$2,500+</option>
-                      </select>
-                  </fieldset>
-              </div>
-              <div class="col-lg-2">                        
-                  <fieldset>
-                      <button class="border-button">Search Results</button>
-                  </fieldset>
-              </div>
-            </div>
-          </form>
+  </div>
+         <form id="search-form" method="GET" action="{{ route('deals') }}">
+  <div class="row">
+    <div class="col-lg-2">
+      <h4>Sort Deals By:</h4>
+    </div>
+    <div class="col-lg-4">
+      <fieldset>
+        <select name="location" class="form-select" onchange="this.form.submit()">
+          <option value="" selected>Destinations</option>
+          <option value="Italy" {{ request('location') == 'Italy' ? 'selected' : '' }} >Italy</option>
+          <option value="France"{{ request('location') == 'France' ? 'selected' : '' }}>France</option>
+          <!-- autres options -->
+        </select>
+      </fieldset>
+    </div>
+    <div class="col-lg-4">
+      <fieldset>
+        <select name="price" class="form-select" onchange="this.form.submit()">
+          <option value="" selected>Price Range</option>
+          <option value="100"  {{ request('price') == '100' ? 'selected' : '' }}>$100 - $250</option>
+          <option value="250" {{ request('price') == '250' ? 'selected' : '' }}>$250 - $500</option>
+          <!-- autres options -->
+        </select>
+      </fieldset>
+    </div>
+    <div class="col-lg-2">
+      <fieldset>
+        <button type="submit" class="btn btn-primary">Search Results</button>
+      </fieldset>
+    </div>
+  </div>
+</form>
         </div>
       </div>
     </div>
@@ -165,7 +185,7 @@ https://templatemo.com/tm-580-woox-travel
                  <p>{{ $offer->description }}</p>
                   <strong>{{ $offer->price }} $</strong>
                  @if($offer->image)
-                  <img src="{{ asset('assets/images/' . $offer->image) }}" alt="{{ $offer->title }}">
+                  <img src="{{ asset('assets/images/' . $offer->image) }}" alt="{{ $offer->title }}" class="minimized-img">
                  @endif
            </div>
        @endforeach   

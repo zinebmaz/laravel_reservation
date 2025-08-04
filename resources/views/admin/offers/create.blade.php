@@ -90,6 +90,25 @@
         </div>
 
         <div class="form-group">
+            <label>Location</label>
+            <select name="location" required>
+                <option value="" disabled selected>-- Choisissez une destination --</option>
+                <option value="Italy">Italy</option>
+                <option value="France">France</option>
+                <option value="Switzerland">Switzerland</option>
+                <option value="Thailand">Thailand</option>
+                <option value="Australia">Australia</option>
+                <option value="India">India</option>
+                <option value="Indonesia">Indonesia</option>
+                <option value="Malaysia">Malaysia</option>
+                <option value="Singapore">Singapore</option>
+            </select>
+        </div>
+
+
+
+
+        <div class="form-group">
             <label>Description</label>
             <textarea name="description" rows="4" required></textarea>
         </div>

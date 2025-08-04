@@ -92,6 +92,24 @@
 
         <label for="title">Title</label>
         <input type="text" name="title" id="title" value="{{ old('title', $offer->title) }}" required>
+          
+          <div class="form-group">
+            <label>Location</label>
+            <select name="location" required>
+                <option value="" disabled {{ old('location', $offer->location) ? '' : 'selected' }}>-- Choisissez une destination --</option>
+                @php
+                    $locations = ['Italy', 'France', 'Switzerland', 'Thailand', 'Australia', 'India', 'Indonesia', 'Malaysia', 'Singapore'];
+                    $selectedLocation = old('location', $offer->location);
+                @endphp
+                @foreach($locations as $loc)
+                    <option value="{{ $loc }}" {{ $selectedLocation === $loc ? 'selected' : '' }}>{{ $loc }}</option>
+                @endforeach
+            </select>
+        </div>
+
+
+
+
 
         <label for="description">Description</label>
         <textarea name="description" id="description" required>{{ old('description', $offer->description) }}</textarea>

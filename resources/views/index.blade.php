@@ -61,7 +61,7 @@ https://templatemo.com/tm-580-woox-travel
                         <li><a href="{{route('deals')}}">Deals</a></li>
                         <li><a href="{{route('reservation')}}">Reservation</a></li>
                         <li><a href="{{route('reservation')}}">Book Yours</a></li>
-                         <li><a href="{{ route('login') }}"><i class="fa fa-user"></i> Login</a></li>
+                        <li><a href="{{ route('login') }}" class="login-btn"><i class="fa fa-user"></i> Login</a></li>
                     </ul>   
                     <a class='menu-trigger'>
                         <span>Menu</span>
@@ -77,23 +77,46 @@ https://templatemo.com/tm-580-woox-travel
 
 <style>
 
+/* Conteneur du menu */
+.main-nav {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    width: 100% !important;
+    white-space: nowrap !important; /* Empêche le retour à la ligne */
+}
+
+/* Liste des liens */
 .main-nav .nav {
-    display: flex;
-    align-items: center;
-    gap: 20px; /* espace entre les liens */
-    list-style: none;
-    margin: 0;
-    padding: 0;
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    gap: 20px !important;
+    list-style: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    flex-wrap: nowrap !important; /* Empêche le passage à la ligne */
 }
 
+/* Items */
 .main-nav .nav li {
-    display: inline-block;
+    display: flex !important;
+    align-items: center !important;
+    height: 100% !important;
 }
 
+/* Liens */
 .main-nav .nav li a {
-    text-decoration: none;
-    color: #fff; /* couleur du texte, à ajuster */
-    padding: 8px 12px;
+    text-decoration: none !important;
+    color: #fff !important;
+    padding: 8px 14px !important;
+    display: flex !important;
+    align-items: center !important;
+    height: 100% !important;
+}
+
+.main-nav .nav li:last-child {
+    margin-left: auto !important;
 }
 
 
@@ -450,6 +473,52 @@ https://templatemo.com/tm-580-woox-travel
       bannerTimer = setInterval(bannerSwitcher, 5000)
     });
   </script>
+
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    // Sélection de l'iframe Google Maps
+    const mapIframe = document.querySelector("#map iframe");
+
+    // Lieux correspondants à chaque pays
+    const locations = {
+        "SWITZERLAND": "Switzerland",
+        "CARIBBEAN": "Caribbean Sea",
+        "FRANCE": "France",
+        "THAILAND": "Thailand"
+    };
+
+    // Sélection de tous les liens "Need Directions ?"
+    document.querySelectorAll(".text-button a").forEach(function(link) {
+        link.addEventListener("click", function(e) {
+            e.preventDefault();
+
+            // Trouver le nom du pays
+            const countryName = this.closest(".right-content").querySelector("h4").innerText.trim().toUpperCase();
+
+            // Si le pays est dans notre liste, changer la carte
+            if (locations[countryName]) {
+                const googleMapURL = `https://www.google.com/maps?q=${encodeURIComponent(locations[countryName])}&output=embed`;
+                mapIframe.src = googleMapURL;
+
+                // Scroll vers la carte
+                window.scrollTo({
+                    top: document.querySelector("#map").offsetTop - 100,
+                    behavior: 'smooth'
+                });
+            }
+        });
+    });
+});
+</script>
+
+
+
+
+
+
+
+
 
   </body>
 
